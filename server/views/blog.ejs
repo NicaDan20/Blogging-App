@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+  <html dir="ltr" lang="en-US">
+  <head>
+
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <title> <%- _title_ %> </title>
+      <link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="css/bootstrap.css" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/dark.css" />
+      <link rel="stylesheet" href="css/font-icons.css" />
+      <link rel="stylesheet" href="css/animate.css" />
+      <link rel="stylesheet" href="css/magnific-popup.css" />
+      <link rel="stylesheet" href="css/calendar.css" />
+      <link rel="stylesheet" href="css/responsive.css" />
+      <link rel="shortcut icon" type="image/x-icon" href="images/deepblue/favicon.ico" /> 
+      <link rel="icon" href="images/deepblue/favicon.ico" type="image/x-icon"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+
+<body class="stretched">
+
+      <!-- Wrapper
+      ====================================== -->
+      <div id="wrapper" class="clearfix">
+        <!-- header
+        ====================================== -->
+        <%- include('partials/topbar'); %>
+        <!-- Header end -->
+        <!-- content
+        ============================ -->
+        		<!-- Page Title
+		============================================= -->
+		<section id="page-title">
+
+			<div class="container clearfix">
+        <% if (typeof tag !== 'undefined') { %>
+        <h1>Articles with the tag: <%= tag %></h1>
+        <% } else { %> 
+          <h1>Articles on various Cybersecurity Topics</h1>
+        <% } %>
+			</div>
+
+		</section><!-- #page-title end -->
+
+              <div class="content-wrap">
+                <div class="container clearfix">
+                  <% if (perms.includes("CanCreateArticle")) { %>
+                    <a href="/blog/new" class="btn btn-primary">New Article</a>
+                    <% } %>
+                    <% if (locals.login !== "" && locals.login !== undefined) { %>
+                    <form action ="/auth/logout" method="POST">
+                      <button type="submit" class="btn btn-danger">Log Out</button>                               
+                    </form>
+                    <% } %>
+
+                
+        <div id="posts" class="small-thumbs">
+                    <% articles.forEach(article => { %>
+                            <div class="entry clearfix">
+                              <div class="entry-image">
+                                <a href="<%= article.coverImagePath %>" data-lightbox="image"><img class="image_fade" src="<%= article.coverImagePath %>" alt="Standard Post with Image"></a>
+                              </div>
+                              <div class="entry-c">
+                                <div class="entry-title">
+                                  <h2><a href="/blog/read/<%= article.slug %>"> <%= article.title %></a></h2>
+                              </div>
+                              <ul class="entry-meta clearfix">
+                                <li><i class="icon-calendar3"><%= " " + article.createdAt.toDateString() %></i></li>
+                                <li><i class="icon-user"><%= " " + article.author %></i></li>
+                            </ul>
+                            <div class="entry-content">
+                                <p><%= article.description %></p>
+                                <ul class="entry-meta-article">
+                                  <li><a href="/blog/read/<%= article.slug %>" class="button button-3d nomargin" role ="button">Read More</a></li> 
+                                  <% if (perms.includes("CanEditArticle")) { %>
+                                    <li><a href="/blog/edit/<%= article.id %>" class="button button-3d nomargin" role ="button">Edit Article</a></li>
+                                    <% } %>
+                                    <% if (perms.includes("CanDeleteArticle")) { %>
+                                    <form action ="/blog/delete/<%= article.id %>" method="POST">
+                                      <li> <button type="submit" class="button button-3d button button-rounded button-red">Delete Article</button></li>                               
+                                    </form>  
+                                    <% } %>
+
+
+                                </ul>
+
+                            </div>
+                              </div>                              
+                            </div>
+                        <%}) %>
+                        <% if (pageList.length > 1) { %> 
+                          <ul class="pagination">
+                            <% if (currentPage!=1) { %>
+                              <li><a href="page=<%= currentPage-1 %>">	&lt; Previous</a></li>
+                           <% } %>
+                            
+                           <% for (i=0; i<pageList.length; i++) { %>
+                            <% if (pageList[i]==currentPage) { %>
+                              <li class="active"><a href="page=<%= pageList[i] %>"><%= pageList[i] %> <span class="sr-only">(current)</span> </a></li>
+                            <%} else { %> 
+                              <li><a href="page=<%= pageList[i] %>"><%= pageList[i] %> </a></li>
+                            <% } %>                         
+                            <%} %>
+  
+                             
+                            <% if (currentPage!=totalPages) { %>
+                              <li><a href="page=<%= currentPage+1 %>">Next &gt; </a></li>
+                            <% } %>
+                          </ul>    
+  
+                        <% } %>
+
+                    </div>
+                </div>
+              </div>
+        <!-- Content end -->
+
+        <%- include ('partials/footer'); %>
+
+      </div>
+
+
+      <!-- wrapper end -->
+
+    <!----- EXTERNAL SCRIPTS --------------->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <!----- FOOTER SCRIPTS --------------->
+
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript">
+
+      jQuery(document).ready(function($){
+        $( '#vertical-nav nav ul li:has(ul)' ).addClass('sub-menu');
+        $( '#vertical-nav nav ul li:has(ul) > a' ).append( ' <i class="icon-angle-down"></i>' );
+
+        $( '#vertical-nav nav ul li:has(ul) > a' ).click( function(e){
+          var element = $(this);
+          $( '#vertical-nav nav ul li' ).not(element.parents()).removeClass('active');
+          element.parent().children('ul').slideToggle( function(){
+            $(this).find('ul').hide();
+            $(this).find('li.active').removeClass('active');
+          });
+          $( '#vertical-nav nav ul li > ul' ).not(element.parent().children('ul')).not(element.parents('ul')).slideUp();
+          element.parent('li:has(ul)').toggleClass('active');
+          e.preventDefault();
+        });
+      });
+      
+  </script>
+    
+</body>
+
+</html>
+

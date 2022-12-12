@@ -1,0 +1,144 @@
+<!-- Footer
+============================================= -->
+<footer id="footer">
+
+  <div class="container">
+
+    <!-- Footer Widgets
+    ============================================= -->
+    <div class="footer-widgets-wrap clearfix">
+
+      <div class="col_two_third">
+
+        <div class="col_one_third">
+
+          <div class="widget clearfix">
+
+            <img src="" alt="" class="footer-logo">
+
+            <p>The Promise Of Managed IT Sevices Done <strong>Right</strong>. </p>
+
+            <div style="background: url('images/world-map.png') no-repeat center center; background-size: 100%;">
+              <address>
+                <strong>Address:</strong><br>
+                5773 Park Plaza Ct, Indianapolis, 46220<br>
+              </address>
+              <abbr title="Phone Number"><strong>Office:</strong></abbr> 317 516 5101<br>
+              <abbr title="Email Address"><strong>Email:</strong></abbr> info@dbcindy.com
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col_one_third">
+
+          <div class="widget widget_links clearfix">
+
+            <h4>Quicklinks</h4>
+
+            <ul>
+              <li><a href="/managed-it-services">Managed IT</a></li>
+              <li><a href="/it-consulting-services">IT Consulting Services</a></li>
+              <li><a href="/hipaa">HIPAA</a></li>
+              <li><a href="/finra">FINRA</a></li>
+              <li><a href="/pci-dss">PCI-DSS</a></li>
+              <li><a href="/cybersecurity">Cybersecurity</a></li>
+              <li><a href="/contact">Contact Page</a></li>
+            </ul>
+
+          </div>
+
+        </div>
+
+        <div class="col_one_third col_last">
+
+          <div class="widget clearfix">
+            <h4>Recent Blogposts</h4>
+
+            <% recentPosts.forEach(post=> { %>
+              <div id="post-list-footer">
+                <div class="spost clearfix">
+                  <div class="entry-c">
+                    <div class="entry-title">
+                      <h4><a href="/blog/read/<%= post.slug %>">
+                          <%= post.title %>
+                        </a></h4>
+                    </div>
+                    <ul class="entry-meta">
+                      <li>
+                        <%= post.createdAt.toDateString() %>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <% if (post !== recentPosts[2]) { %>
+                  <div class="footerline"></div>
+               <% } %>
+                <% }) %>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col_one_third col_last">
+
+    <div class="widget clearfix" style="margin-bottom: -20px;">
+
+      <h4>Business Hours</h4>
+
+      <ul style="list-style-type:none;">
+        <li><strong>Monday</strong>: 10:00am - 6:00pm</li>
+        <li><strong>Tuesday</strong>: 10:00am - 6:00pm</li>
+        <li><strong>Tuesday</strong>: 10:00am - 6:00pm</li>
+        <li><strong>Wednesday</strong>: 10:00am - 6:00pm</li>
+        <li><strong>Thursday</strong>: 10:00am - 6:00pm</li>
+        <li><strong>Friday</strong>: 10:00am - 6:00pm</li>
+        <li><strong>Saturday</strong>: Closed</li>
+        <li><strong>Sunday</strong>: Closed</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="container clearfix">
+
+  </div>
+
+  </div>
+
+  </div>
+
+
+  <div class="widget clearfix" style="margin-bottom: -40px;">
+
+
+  </div>
+
+  </div>
+  </div><!-- .footer-widgets-wrap end -->
+  <!-- Copyrights
+============================================= -->
+  <div id="copyrights">
+    <div id="copyrights">
+      <div class="container clearfix">
+  
+        <div class="col_half">
+          <div class="copyright-links">
+            <br>
+            <p> Copyright &copy; 2021 All Rights Reserved by DeepBlue Computers. </p>
+          </div>
+        </div>
+    
+      </div>
+    
+      </div>
+  
+    </div>
+
+</div>  <!--#copyrights end -->
+
+</footer><!-- #footer end -->

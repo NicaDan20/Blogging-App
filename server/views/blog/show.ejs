@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html dir="ltr" lang="en-US">
+
+<head>
+
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>
+    <%- _title_ %>
+  </title>
+  <link
+    href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic"
+    rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dark.css" />
+  <link rel="stylesheet" href="css/font-icons.css" />
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <link rel="stylesheet" href="css/calendar.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/deepblue/favicon.ico" />
+  <link rel="icon" href="images/deepblue/favicon.ico" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property='og:title' content='<%= blogPost.title%>' />
+  <meta property='og:image' content='<%= blogPost.coverImagePath%>' />
+  <meta property='og:description' content='<%=blogPost.description%>' />
+  <meta property='og:url' content='http://localhost:5000/blog/read/<%=blogPost.slug%>' />
+
+</head>
+
+<body class="stretched">
+
+
+  <!-- Share Button Script -->
+
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"
+    nonce="lYDMmYzU"></script>
+
+
+
+  <!-- Share Button Script End -->
+
+
+  <!-- Wrapper
+      ====================================== -->
+  <div id="wrapper" class="clearfix">
+    <!-- header
+        ====================================== -->
+    <%- include('../partials/topbar'); %>
+      <!-- Header end -->
+      <!-- content
+        ============================ -->
+      <section id="page-title">
+
+        <div class="container clearfix">
+          <h1>
+            <%- blogPost.title %>
+          </h1>
+        </div>
+
+      </section>
+
+      <section id="content">
+        <div class="content-wrap">
+          <div class="container clearfix">
+            <div class="single-post nobottommargin">
+              <div class="entry clearfix">
+                <div class="entry-title">
+                  <h2>
+                    <%= blogPost.subtitle %>
+                  </h2>
+                </div><!-- .entry-title end -->
+                <ul class="entry-meta clearfix">
+                  <li><i class="icon-calendar3">
+                      <%= " " + blogPost.createdAt.toDateString() %>
+                    </i></li>
+                  <li><i class="icon-user">
+                      <%= " " + blogPost.author %>
+                    </i></li>
+                </ul>
+                <div class="entry-image">
+                  <a href="<%= blogPost.coverImagePath %>" data-lightbox="image"><img
+                      src="<%= blogPost.coverImagePath %>" alt="Sample Image"></a>
+                </div><!-- .entry-image end -->
+                <div class="entry-content notopmargin">
+                  <%- blogPost.sanitizedHTML %>
+                </div>
+              </div>
+              <p>Tags: <% for(i=0;i<blogPost.tags.length; i++) { %>
+                  <% if (i !=blogPost.tags.length-1) { %>
+                    <a href="/blog/tags/<%=blogPost.tags[i]%>">
+                      <%= blogPost.tags[i] %>
+                    </a>,
+                    <%} %>
+                      <% } %> <a href="/blog/tags/<%=blogPost.tags[blogPost.tags.length-1]%>">
+                          <%= blogPost.tags[blogPost.tags.length-1] %>
+                        </a> </p>
+
+                        <div class="col_full clearfix">
+                          <ul class='entry-meta-article'>
+                            <li>
+                              <a class="button button-3d nomargin" href="javascript:history.back()" role="button">Go Back</a>
+                            </li>
+                            <li>
+                              <div class="fb-share-button" data-href='http://localhost:5000/blog/read/<%=blogPost.slug%>'
+                                data-layout="button" data-size="large"><a class="social-icon si-dark si-facebook" target="_blank"
+                                  href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A5000%2Fblog%2Fread%2F<%= blogPost.slug %>&amp;src=sdkpreparse"
+                                  class="fb-xfbml-parse-ignore"><i class="icon-facebook"></i><i class="icon-facebook"></i></a></div>
+    
+                            </li>
+                            <li>
+                              <a href='https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:5000/blog/read/<%= blogPost.slug %>'
+                                class="social-icon si-dark si-linkedin"><i class="icon-linkedin"></i><i class="icon-linkedin"></i></a>
+    
+                            </li>
+                            <li>
+                              <a class="social-icon si-dark si-twitter"
+                              href="http://twitter.com/share?url=http%3A%2F%2Flocalhost%3A5000%2Fblog%2Fread%2F<%= blogPost.slug %>&text=DeepBlue%20Computers%20-"
+                              target="_blank"><i class="icon-twitter"></i><i class="icon-twitter"></i></a>              
+                            </li>
+                          </ul>
+                        </div>
+              <div class="line"></div>
+              <h4>Recent Posts:</h4>
+
+              <div class="related-posts clearfix">
+
+                <div class="col_half nobottommargin">
+
+                  <% recentPostsLeft.forEach(left=> { %>
+                    <div class="mpost clearfix">
+                      <div class="entry-image">
+                        <a href="<%= left.coverImagePath %>"><img src="<%= left.coverImagePath %>"
+                            alt="Post Thumbnail"></a>
+                      </div>
+                      <div class="entry-c">
+                        <div class="entry-title">
+                          <h4><a href="/blog/read/<%= left.slug %>">
+                              <%= left.title %>
+                            </a></h4>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                          <li><i class="icon-calendar3"></i>
+                            <%= "" + left.createdAt.toDateString() %>
+                          </li>
+                        </ul>
+                        <div class="entry-content-posts">
+                          <%= left.description %>
+                        </div>
+                      </div>
+                    </div>
+                    <% }) %>
+
+                </div>
+
+                <div class="col_half nobottommargin col_last">
+
+                  <% recentPostsRight.forEach(right=> { %>
+                    <div class="mpost clearfix">
+                      <div class="entry-image">
+                        <a href="<%= right.coverImagePath %>"><img src="<%= right.coverImagePath %>"
+                            alt="Post Thumbnail"></a>
+                      </div>
+                      <div class="entry-c">
+                        <div class="entry-title">
+                          <h4><a href="/blog/read/<%= right.slug %>">
+                              <%= right.title %>
+                            </a></h4>
+                        </div>
+                        <ul class="entry-meta clearfix">
+                          <li><i class="icon-calendar3"></i>
+                            <%= "" + right.createdAt.toDateString() %>
+                          </li>
+                        </ul>
+                        <div class="entry-content-posts">
+                          <%= right.description %>
+                        </div>
+                      </div>
+                    </div>
+
+                    <% }) %>
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content end -->
+
+      <%- include ('../partials/footer'); %>
+
+  </div>
+
+
+  <!-- wrapper end -->
+
+  <!----- EXTERNAL SCRIPTS --------------->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/plugins.js"></script>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+
+  <!----- FOOTER SCRIPTS --------------->
+
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript">
+
+    jQuery(document).ready(function ($) {
+      $('#vertical-nav nav ul li:has(ul)').addClass('sub-menu');
+      $('#vertical-nav nav ul li:has(ul) > a').append(' <i class="icon-angle-down"></i>');
+
+      $('#vertical-nav nav ul li:has(ul) > a').click(function (e) {
+        var element = $(this);
+        $('#vertical-nav nav ul li').not(element.parents()).removeClass('active');
+        element.parent().children('ul').slideToggle(function () {
+          $(this).find('ul').hide();
+          $(this).find('li.active').removeClass('active');
+        });
+        $('#vertical-nav nav ul li > ul').not(element.parent().children('ul')).not(element.parents('ul')).slideUp();
+        element.parent('li:has(ul)').toggleClass('active');
+        e.preventDefault();
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<h1>Login Page </h1> 
+ <% if (messages.error) { %>
+    <%= messages.error %>
+    <% } %>
+<form action="/hatti/login" method="POST">
+    <div>
+        <label for="username">Username</label>
+        <input
+        type="username"
+        name="username"
+        placeholder="Enter username"
+        />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Log In</button>
+</form>
